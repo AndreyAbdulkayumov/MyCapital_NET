@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCapital_Mobile_MAUI.MainPage" 
+             Title="Мой капитал"
+             BackgroundColor="#FF171717"             
+             Shell.NavBarIsVisible="False" 
+             Loaded="ContentPage_Loaded">
+
+    <!-- Shell.NavBarIsVisible="False" - отключение верхней панели с заголовком -->
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="240"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              BackgroundColor="#FF282828">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="Label_Date" Text="Курс валют на xx.xx.xxxx" Grid.Row="0"
+                   Margin="20,0,0,0"
+                   FontSize="20"
+                   TextColor="Silver"
+                   FontAutoScalingEnabled="False"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Label x:Name="Label_Rate_Dollar" Text="1$ = " Grid.Row="1"
+                   Margin="20,0,0,0"
+                   TextColor="Silver"
+                   FontSize="18"
+                   FontAutoScalingEnabled="False"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Label x:Name="Label_Rate_Euro" Text="1E = " Grid.Row="1"
+                   Margin="180,0,0,0"
+                   TextColor="Silver"
+                   FontSize="18"
+                   FontAutoScalingEnabled="False"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Label Text="Всего средств:" Grid.Row="2"
+                   Margin="20,0,0,0"
+                   FontSize="18"
+                   FontAutoScalingEnabled="False"
+                   TextColor="#FFAF562F"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Button x:Name="Button_AmountOfMoney" Grid.Row="2"
+                    Margin="155,0,0,0" Text="0 руб."
+                    FontSize="20"
+                    FontAutoScalingEnabled="False"
+                    BackgroundColor="#FF404040"
+                    TextColor="#FFE6E6E6"
+                    VerticalOptions="Center" HorizontalOptions="Start"
+                    Clicked="Button_AmountOfMoney_Clicked"/>
+
+            <Button x:Name="Button_CreateNewField" Grid.Row="3"
+                    Margin="20,0,0,0"
+                    Text="Добавить новое поле"
+                    FontSize="16"
+                    FontAutoScalingEnabled="False"
+                    Background="#FF404040"
+                    TextColor="Silver"
+                    VerticalOptions="Center" HorizontalOptions="Start"
+                    Clicked="Button_CreateNewField_Clicked"/>
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+
+            <VerticalStackLayout x:Name="VerticalStackLayout_Content"
+                                 Spacing="10"
+                                 Padding="30,0"
+                                 VerticalOptions="StartAndExpand">
+
+
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>

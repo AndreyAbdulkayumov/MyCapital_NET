@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCapital_Mobile_MAUI.ErrorConnectionPage"
+             Title="ErrorConnectionPage"
+             Shell.NavBarIsVisible="False">
+    
+    <Grid>
+        
+        <Label Text="Проблема с подключением к Интернету"
+               FontSize="22"
+               Margin="0,0,0,100"
+               Padding="40,5,40,5"
+               FontAutoScalingEnabled="False"
+               HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+               VerticalOptions="Center" HorizontalOptions="Center" />
+
+        <Button x:Name="Button_TryAgain" Grid.Row="2"
+                Margin="0,200,0,0" Text="Попробовать снова"
+                FontSize="20"
+                FontAutoScalingEnabled="False"
+                BackgroundColor="#FF404040"
+                TextColor="#FFE6E6E6"
+                VerticalOptions="Center" HorizontalOptions="Center"
+                Clicked="Button_TryAgain_Clicked"/>
+        
+    </Grid>
+</ContentPage>
