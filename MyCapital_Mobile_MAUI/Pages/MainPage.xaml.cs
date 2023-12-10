@@ -118,7 +118,7 @@ public partial class MainPage : ContentPage
         }
     }
     
-    private void Button_CreateNewField_Clicked(object sender, EventArgs e)
+    private async void Button_CreateNewField_Clicked(object sender, EventArgs e)
     {
         try
         {
@@ -150,7 +150,7 @@ public partial class MainPage : ContentPage
 
         catch (Exception error)
         {
-            Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+            await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Text.Json;
 
@@ -117,7 +118,14 @@ namespace Core.RateSourse_RussianCentralBank
 
             await Task.WhenAll(Tasks);
 
-            return JsonSerializer.Deserialize<Rate_FromCB>(DecodedResponse.Result);
+            Rate_FromCB? Rate = JsonSerializer.Deserialize<Rate_FromCB>(DecodedResponse.Result);
+
+            if (Rate == null)
+            {
+                throw new Exception("Ошибка десериализации JSON файла.");
+            }
+
+            return Rate;
         }
 
         public Rate GetRate(TypeOfCurrency type)

@@ -68,6 +68,5 @@ namespace Core
                     throw new Exception("Неизвестный тип валюты.");
             }
         }
-
     }
 }

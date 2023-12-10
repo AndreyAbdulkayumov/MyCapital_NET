@@ -32,9 +32,11 @@ namespace MyCapital_Mobile_MAUI
         {
             try
             {
-                if (sender as Entry != null)
+                Entry? Control = sender as Entry;
+
+                if (Control != null)
                 {
-                    PartOfCapital SelectedPart = GetPart((sender as Element).ClassId);
+                    PartOfCapital SelectedPart = GetPart(Control.ClassId);
 
                     SelectedPart.Name = e.NewTextValue;
 
@@ -58,9 +60,11 @@ namespace MyCapital_Mobile_MAUI
         {
             try
             {
-                if (sender as CheckBox != null)
+                CheckBox? Control = sender as CheckBox;
+
+                if (Control != null)
                 {
-                    PartOfCapital SelectedPart = GetPart((sender as Element).ClassId);
+                    PartOfCapital SelectedPart = GetPart(Control.ClassId);
 
                     SelectedPart.Visibility = e.Value;
 
@@ -87,12 +91,14 @@ namespace MyCapital_Mobile_MAUI
         {
             try
             {
-                if (sender as Entry != null)
+                Entry? Control = sender as Entry;
+
+                if (Control != null)
                 {
                     // По факту MaxLength 10, эта особенность появляется из за добавления пробелов к числам
-                    if ((sender as Entry).Text.Length >= (sender as Entry).MaxLength)
+                    if (Control.Text.Length >= Control.MaxLength)
                     {
-                        (sender as Entry).Text = e.OldTextValue;
+                        Control.Text = e.OldTextValue;
                         return;
                     }
 
@@ -103,7 +109,7 @@ namespace MyCapital_Mobile_MAUI
                         return;
                     }
 
-                    string EnteredText = (sender as Entry).Text.Replace(" ", "");
+                    string EnteredText = Control.Text.Replace(" ", "");
 
                     //  Обрезание дробной части числа в строке до сотых
 
@@ -123,7 +129,7 @@ namespace MyCapital_Mobile_MAUI
 
                     double EnteredValue;
 
-                    if ((sender as Entry).Text == "")
+                    if (Control.Text == "")
                     {
                         EnteredValue = 0;
                     }
@@ -133,17 +139,18 @@ namespace MyCapital_Mobile_MAUI
                         if (Double.TryParse(EnteredText, NumberStyles.Float, CultureInfo.InvariantCulture, out EnteredValue) == false)
                         {
                             EnteredText = EnteredText.Remove(EnteredText.Length - 1);
-                            (sender as Entry).Text = EnteredText;
+                            Control.Text = EnteredText;
+
                             await Application.Current.MainPage.DisplayAlert("Предупреждение",
                                 "Можно вводить только целые и дробные числа.", "ОK");
                         }
                     }
 
-                    PartOfCapital SelectedPart = GetPart((sender as Element).ClassId);
+                    PartOfCapital SelectedPart = GetPart(Control.ClassId);
 
                     SelectedPart.Value = EnteredValue;
 
-                    (sender as Entry).Text = MakeSpaceInNumber(EnteredText);
+                    Control.Text = MakeSpaceInNumber(EnteredText);
 
                     if (SelectedPart.SelectedCurrency == TypeOfCurrency.NotDefined)
                     {
@@ -173,7 +180,9 @@ namespace MyCapital_Mobile_MAUI
         {
             try
             {
-                if (sender as Button != null)
+                Button? Control = sender as Button;
+
+                if (Control != null)
                 {
                     string SelectedCurrency = await DisplayActionSheet("Выберите валюту:", null, null,
                         "Рубль", "Доллар", "Евро");
@@ -183,9 +192,9 @@ namespace MyCapital_Mobile_MAUI
                         return;
                     }
 
-                    (sender as Button).Text = SelectedCurrency;
+                    Control.Text = SelectedCurrency;
 
-                    PartOfCapital SelectedPart = GetPart((sender as Element).ClassId);
+                    PartOfCapital SelectedPart = GetPart(Control.ClassId);
 
                     SelectedPart.SelectedCurrency = Currency.GetType(SelectedCurrency);
 
@@ -212,9 +221,11 @@ namespace MyCapital_Mobile_MAUI
         {
             try
             {
-                if (sender as Button != null)
+                Button? Control = sender as Button;
+
+                if (Control != null)
                 {
-                    PartOfCapital SelectedPart = GetPart((sender as Element).ClassId);
+                    PartOfCapital SelectedPart = GetPart(Control.ClassId);
 
                     Parts.Remove(SelectedPart);
 
