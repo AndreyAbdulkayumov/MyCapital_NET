@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Core;
 using Core.RateSourse_RussianCentralBank;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MyCapital_Mobile_MAUI;
 
@@ -14,6 +15,7 @@ public partial class MainPage : ContentPage
 
     private double AmountOfMoney_rub = 0;
     private TypeOfCurrency ResultCurrency = TypeOfCurrency.Ruble;
+
 
     public MainPage()
 	{
@@ -67,7 +69,7 @@ public partial class MainPage : ContentPage
                     element.Name,
                     element.Visibility,
                     element.Value != 0 ? MakeSpaceInNumber(element.Value.ToString()) : null,
-                    CurrentCurrency != TypeOfCurrency.NotDefined ? Currency.GetName(CurrentCurrency) : String.Empty
+                    CurrentCurrency != TypeOfCurrency.NotDefined ? Currency.GetName(CurrentCurrency) : null
                     );
 
                 VerticalStackLayout_Content.Add(Field);
@@ -89,8 +91,7 @@ public partial class MainPage : ContentPage
 
         catch (Exception error)
         {
-            await Application.Current.MainPage.DisplayAlert("Ошибка",
-                "Ошибка запуска приложения:\n\n" + error.Message, "ОK");
+            await DisplayAlert("Ошибка", "Ошибка запуска приложения:\n\n" + error.Message, "ОK");
         }
     }    
 
@@ -114,7 +115,7 @@ public partial class MainPage : ContentPage
 
         catch (Exception error)
         {
-            await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+            await DisplayAlert("Ошибка", error.Message, "ОK");
         }
     }
     
@@ -150,7 +151,7 @@ public partial class MainPage : ContentPage
 
         catch (Exception error)
         {
-            await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+            await DisplayAlert("Ошибка", error.Message, "ОK");
         }
     }
 }

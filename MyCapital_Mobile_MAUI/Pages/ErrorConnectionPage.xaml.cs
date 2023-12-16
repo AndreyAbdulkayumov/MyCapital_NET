@@ -11,9 +11,7 @@ public partial class ErrorConnectionPage : ContentPage
     {
         if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
         {
-            await Application.Current.MainPage.DisplayAlert("Ошибка",
-                "Не удалось подключиться к Интернету", "ОK");
-
+            await DisplayAlert("Ошибка", "Не удалось подключиться к Интернету", "ОK");
             return;
         }
         

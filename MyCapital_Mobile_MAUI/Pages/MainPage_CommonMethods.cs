@@ -102,8 +102,7 @@ namespace MyCapital_Mobile_MAUI
 
             catch (Exception error)
             {
-                Application.Current.MainPage.DisplayAlert("Ошибка",
-                    "Ошибка подсчета результата:\n\n" + error.Message, "ОK");
+                throw new Exception("Ошибка подсчета результата:\n\n" + error.Message);
             }
         }
     }

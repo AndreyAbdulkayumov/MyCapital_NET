@@ -19,10 +19,10 @@ namespace MyCapital_Mobile_MAUI
             EventHandler<TextChangedEventArgs> Entry_AmountOfMoney_TextChanged_Handler,
             EventHandler Button_TypeOfCurrency_Click_Handler,
             EventHandler Button_DeleteField_Click_Handler,
-            string FieldName,
+            string? FieldName,
             bool Visibility,
-            string AmountOfMoney,
-            string SeletedCurrency)
+            string? AmountOfMoney,
+            string? SeletedCurrency)
         {
             LastID++;
 

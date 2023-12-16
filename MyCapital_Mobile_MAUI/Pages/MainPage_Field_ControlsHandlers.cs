@@ -28,7 +28,7 @@ namespace MyCapital_Mobile_MAUI
          * 
          */
 
-        private async void Entry_FieldName_TextChanged(object sender, TextChangedEventArgs e)
+        private async void Entry_FieldName_TextChanged(object? sender, TextChangedEventArgs e)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace MyCapital_Mobile_MAUI
 
             catch (Exception error)
             {
-                await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+                await DisplayAlert("Ошибка", error.Message, "ОK");
             }
         }
 
@@ -56,7 +56,7 @@ namespace MyCapital_Mobile_MAUI
          * 
          */
 
-        private async void CheckBox_ChangeVisibility_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private async void CheckBox_ChangeVisibility_CheckedChanged(object? sender, CheckedChangedEventArgs e)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace MyCapital_Mobile_MAUI
 
             catch (Exception error)
             {
-                await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+                await DisplayAlert("Ошибка", error.Message, "ОK");
             }
         }
 
@@ -87,7 +87,7 @@ namespace MyCapital_Mobile_MAUI
          * 
          */
 
-        private async void Entry_AmountOfMoney_TextChanged(object sender, TextChangedEventArgs e)
+        private async void Entry_AmountOfMoney_TextChanged(object? sender, TextChangedEventArgs e)
         {
             try
             {
@@ -141,8 +141,7 @@ namespace MyCapital_Mobile_MAUI
                             EnteredText = EnteredText.Remove(EnteredText.Length - 1);
                             Control.Text = EnteredText;
 
-                            await Application.Current.MainPage.DisplayAlert("Предупреждение",
-                                "Можно вводить только целые и дробные числа.", "ОK");
+                            await DisplayAlert("Предупреждение", "Можно вводить только целые и дробные числа.", "ОK");
                         }
                     }
 
@@ -165,7 +164,7 @@ namespace MyCapital_Mobile_MAUI
 
             catch (Exception error)
             {
-                await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+                await DisplayAlert("Ошибка", error.Message, "ОK");
             }
         }
 
@@ -176,7 +175,7 @@ namespace MyCapital_Mobile_MAUI
          * 
          */
 
-        private async void Button_TypeOfCurrency_Clicked(object sender, EventArgs e)
+        private async void Button_TypeOfCurrency_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -206,7 +205,7 @@ namespace MyCapital_Mobile_MAUI
 
             catch (Exception error)
             {
-                await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+                await DisplayAlert("Ошибка", error.Message, "ОK");
             }
         }
 
@@ -217,7 +216,7 @@ namespace MyCapital_Mobile_MAUI
          * 
          */
 
-        private async void Button_DeleteField_Clicked(object sender, EventArgs e)
+        private async void Button_DeleteField_Clicked(object? sender, EventArgs e)
         {
             try
             {
@@ -239,7 +238,7 @@ namespace MyCapital_Mobile_MAUI
 
             catch (Exception error)
             {
-                await Application.Current.MainPage.DisplayAlert("Ошибка", error.Message, "ОK");
+                await DisplayAlert("Ошибка", error.Message, "ОK");
             }
         }
     }
