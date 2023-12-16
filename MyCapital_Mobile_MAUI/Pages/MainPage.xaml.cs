@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using Core;
 using Core.RateSourse_RussianCentralBank;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MyCapital_Mobile_MAUI;
 
