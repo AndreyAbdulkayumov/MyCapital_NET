@@ -25,7 +25,7 @@ https://dotnet.microsoft.com/en-us/apps/maui
 ## Внешний вид
 
 <p align="center">
-  <img src="https://github.com/AndreyAbdulkayumov/MyCapital_Mobile_MAUI/assets/86914394/937a3fcb-7474-4b9d-a7e0-e04d88fd3733" />
+  <img src="https://github.com/AndreyAbdulkayumov/MyCapital_NET/assets/86914394/8bacc2a9-254a-47c7-a64a-bd580f21acf6" />
 </p>
 
 ## Внимание!
