@@ -11,10 +11,10 @@ public partial class MainPage : ContentPage
 
     private readonly List<PartOfCapital> Parts = new List<PartOfCapital>();
 
-    private readonly IRateSource Data_CB = new RussianCentralBank();
+    //private readonly IRateSource Data_CB = new RussianCentralBank();
 
-    private double AmountOfMoney_rub = 0;
-    private TypeOfCurrency ResultCurrency = TypeOfCurrency.Ruble;
+    //private double AmountOfMoney_rub = 0;
+    //private TypeOfCurrency ResultCurrency = TypeOfCurrency.Ruble;
 
 
     private readonly MainPage_VM _viewModel;

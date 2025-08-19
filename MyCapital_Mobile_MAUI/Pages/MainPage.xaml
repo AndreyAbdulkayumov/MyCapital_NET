@@ -82,16 +82,19 @@
         </Grid>
 
         <ScrollView Grid.Row="1">
-
-            <VerticalStackLayout x:Name="VerticalStackLayout_Content"
-                                 Spacing="10"
-                                 Padding="30,0"
-                                 VerticalOptions="StartAndExpand">
-
-                <local:Field />
-
-            </VerticalStackLayout>
-
+            
+            <StackLayout BindableLayout.ItemsSource="{Binding Fields}" 
+                         Spacing="20"
+                         Padding="20">
+                
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <local:Field />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+                
+            </StackLayout>
+            
         </ScrollView>
 
     </Grid>

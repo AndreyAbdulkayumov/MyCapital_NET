@@ -1,6 +1,8 @@
 ﻿using Core;
+using DynamicData;
 using ReactiveUI;
 using Services.Interfaces;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Reactive;
 
@@ -43,6 +45,14 @@ public class MainPage_VM : ReactiveObject
     public ReactiveCommand<Unit, Unit> Command_ChangeСurrency { get; set; }
     public ReactiveCommand<Unit, Unit> Command_CreateNewField { get; set; }
 
+    private ObservableCollection<Field_VM> _fields = new ObservableCollection<Field_VM>();
+
+    public ObservableCollection<Field_VM> Fields
+    {
+        get => _fields;
+        set => this.RaiseAndSetIfChanged(ref _fields, value);
+    }
+
     private readonly INotifications _notifications;
     private readonly IRateSource _rateSource;
 
@@ -55,7 +65,20 @@ public class MainPage_VM : ReactiveObject
         _rateSource = rateSource ?? throw new ArgumentNullException(nameof(rateSource));
 
         Command_ChangeСurrency = ReactiveCommand.CreateFromTask(ChangeCurrency);
-        Command_CreateNewField = ReactiveCommand.CreateFromTask(CreateNewField);
+        Command_ChangeСurrency.ThrownExceptions.Subscribe(async error => await _notifications.ShowAlert("Ошибка", $"Ошибка изменения типа валюты.\n\n{error.Message}", "ОK"));
+
+        Command_CreateNewField = ReactiveCommand.Create(() => Fields.Add(new Field_VM(RemoveField, _notifications)));
+        Command_CreateNewField.ThrownExceptions.Subscribe(async error => await _notifications.ShowAlert("Ошибка", $"Ошибка создания нового поля.\n\n{error.Message}", "ОK"));
+    }
+
+    private void RemoveField(Guid fieldId)
+    {
+        var removedField = Fields.FirstOrDefault(f => f.Id == fieldId);
+
+        if (removedField == null)
+            return;
+
+        Fields.Remove(removedField);
     }
 
     public async Task Init()
@@ -80,35 +103,14 @@ public class MainPage_VM : ReactiveObject
 
     private async Task ChangeCurrency()
     {
-        try
-        {
-            var SelectedCurrency = await _notifications.ShowSheet("Выберите валюту:", null, null, "Рубль", "Доллар", "Евро");
+        var SelectedCurrency = await _notifications.ShowSheet("Выберите валюту:", null, null, "Рубль", "Доллар", "Евро");
 
-            if (SelectedCurrency == null)
-                return;
+        if (SelectedCurrency == null)
+            return;
 
-            _resultCurrency = Currency.GetType(SelectedCurrency);
+        _resultCurrency = Currency.GetType(SelectedCurrency);
 
-            AmountOfMoney = $"{MakeSpaceInNumber(AmountOfMoney_ConvertIn(_resultCurrency).ToString(CultureInfo.InvariantCulture))} {Currency.GetShortName(_resultCurrency)}";
-        }
-
-        catch (Exception error)
-        {
-            await _notifications.ShowAlert("Ошибка", error.Message, "ОK");
-        }
-    }
-
-    private async Task CreateNewField()
-    {
-        try
-        {
-
-        }
-
-        catch (Exception error)
-        {
-            await _notifications.ShowAlert("Ошибка", error.Message, "ОK");
-        }
+        AmountOfMoney = $"{MakeSpaceInNumber(AmountOfMoney_ConvertIn(_resultCurrency).ToString(CultureInfo.InvariantCulture))} {Currency.GetShortName(_resultCurrency)}";
     }
 
     private double AmountOfMoney_ConvertIn(TypeOfCurrency Type)

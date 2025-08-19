@@ -17,88 +17,88 @@ namespace MyCapital_Mobile_MAUI
             SaveFile.Save(DataForSave, SaveFileName);
         }
 
-        private double AmountOfMoney_ConvertIn(TypeOfCurrency Type)
-        {
-            switch (Type)
-            {
-                case TypeOfCurrency.Ruble:
-                    return Math.Round(AmountOfMoney_rub, 2);
+        //private double AmountOfMoney_ConvertIn(TypeOfCurrency Type)
+        //{
+        //    switch (Type)
+        //    {
+        //        case TypeOfCurrency.Ruble:
+        //            return Math.Round(AmountOfMoney_rub, 2);
 
-                case TypeOfCurrency.Dollar:
-                    return CurrencyConvert.ToDollar(AmountOfMoney_rub, TypeOfCurrency.Ruble, Data_CB);
+        //        case TypeOfCurrency.Dollar:
+        //            return CurrencyConvert.ToDollar(AmountOfMoney_rub, TypeOfCurrency.Ruble, Data_CB);
 
-                case TypeOfCurrency.Euro:
-                    return CurrencyConvert.ToEuro(AmountOfMoney_rub, TypeOfCurrency.Ruble, Data_CB);
+        //        case TypeOfCurrency.Euro:
+        //            return CurrencyConvert.ToEuro(AmountOfMoney_rub, TypeOfCurrency.Ruble, Data_CB);
 
-                default:
-                    throw new Exception("Неизвестная итоговая валюта.");
-            }
-        }
+        //        default:
+        //            throw new Exception("Неизвестная итоговая валюта.");
+        //    }
+        //}
 
-        private static string MakeSpaceInNumber(string EnteredText)
-        {
-            string[] SplitText = EnteredText.Split('.');
+        //private static string MakeSpaceInNumber(string EnteredText)
+        //{
+        //    string[] SplitText = EnteredText.Split('.');
 
-            char[] FieldNumber_Original = SplitText[0].ToCharArray();
+        //    char[] FieldNumber_Original = SplitText[0].ToCharArray();
 
-            List<char> FieldNumber_Modified = new List<char>();
+        //    List<char> FieldNumber_Modified = new List<char>();
 
-            Array.Reverse(FieldNumber_Original);
+        //    Array.Reverse(FieldNumber_Original);
 
-            for (int i = 0; i < FieldNumber_Original.Length; i++)
-            {
-                FieldNumber_Modified.Add(FieldNumber_Original[i]);
+        //    for (int i = 0; i < FieldNumber_Original.Length; i++)
+        //    {
+        //        FieldNumber_Modified.Add(FieldNumber_Original[i]);
 
-                if ((i != FieldNumber_Original.Length - 1) && (i + 1) % 3 == 0)
-                {
-                    FieldNumber_Modified.Add(' ');
-                }
-            }
+        //        if ((i != FieldNumber_Original.Length - 1) && (i + 1) % 3 == 0)
+        //        {
+        //            FieldNumber_Modified.Add(' ');
+        //        }
+        //    }
 
-            char[] OutArray = FieldNumber_Modified.ToArray();
+        //    char[] OutArray = FieldNumber_Modified.ToArray();
 
-            Array.Reverse(OutArray);
+        //    Array.Reverse(OutArray);
 
-            string FieldNumber = new string(OutArray);
+        //    string FieldNumber = new string(OutArray);
 
-            if (SplitText.Length > 1)
-            {
-                FieldNumber += "." + SplitText[1];
-            }
+        //    if (SplitText.Length > 1)
+        //    {
+        //        FieldNumber += "." + SplitText[1];
+        //    }
 
-            return FieldNumber;
-        }      
+        //    return FieldNumber;
+        //}      
 
-        private void CalculateResult()
-        {
-            //try
-            //{
-            //    if (Parts.Count != 0)
-            //    {
-            //        AmountOfMoney_rub = 0;
+        //private void CalculateResult()
+        //{
+        //    try
+        //    {
+        //        if (Parts.Count != 0)
+        //        {
+        //            AmountOfMoney_rub = 0;
 
-            //        foreach (PartOfCapital element in Parts)
-            //        {
-            //            if (element.SelectedCurrency != TypeOfCurrency.NotDefined && element.Visibility == true)
-            //            {
-            //                AmountOfMoney_rub += element.Value * Data_CB.GetRate(element.SelectedCurrency).Value;
-            //            }
-            //        }
+        //            foreach (PartOfCapital element in Parts)
+        //            {
+        //                if (element.SelectedCurrency != TypeOfCurrency.NotDefined && element.Visibility == true)
+        //                {
+        //                    AmountOfMoney_rub += element.Value * Data_CB.GetRate(element.SelectedCurrency).Value;
+        //                }
+        //            }
 
-            //        Button_AmountOfMoney.Text = MakeSpaceInNumber(AmountOfMoney_ConvertIn(ResultCurrency).ToString(CultureInfo.InvariantCulture)) +
-            //            " " + Currency.GetShortName(ResultCurrency);
-            //    }
+        //            Button_AmountOfMoney.Text = MakeSpaceInNumber(AmountOfMoney_ConvertIn(ResultCurrency).ToString(CultureInfo.InvariantCulture)) +
+        //                " " + Currency.GetShortName(ResultCurrency);
+        //        }
 
-            //    else
-            //    {
-            //        Button_AmountOfMoney.Text = "0 " + Currency.GetShortName(ResultCurrency);
-            //    }
-            //}
+        //        else
+        //        {
+        //            Button_AmountOfMoney.Text = "0 " + Currency.GetShortName(ResultCurrency);
+        //        }
+        //    }
 
-            //catch (Exception error)
-            //{
-            //    throw new Exception("Ошибка подсчета результата:\n\n" + error.Message);
-            //}
-        }
+        //    catch (Exception error)
+        //    {
+        //        throw new Exception("Ошибка подсчета результата:\n\n" + error.Message);
+        //    }
+        //}
     }
 }

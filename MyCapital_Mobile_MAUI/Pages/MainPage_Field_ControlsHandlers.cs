@@ -68,7 +68,7 @@ namespace MyCapital_Mobile_MAUI
 
                     SelectedPart.Visibility = e.Value;
 
-                    CalculateResult();
+                    //CalculateResult();
 
                     SaveData();
                 }
@@ -149,14 +149,14 @@ namespace MyCapital_Mobile_MAUI
 
                     SelectedPart.Value = EnteredValue;
 
-                    Control.Text = MakeSpaceInNumber(EnteredText);
+                    //Control.Text = MakeSpaceInNumber(EnteredText);
 
                     if (SelectedPart.SelectedCurrency == TypeOfCurrency.NotDefined)
                     {
                         return;
                     }
 
-                    CalculateResult();
+                   // CalculateResult();
 
                     SaveData();
                 }
@@ -197,7 +197,7 @@ namespace MyCapital_Mobile_MAUI
 
                     SelectedPart.SelectedCurrency = Currency.GetType(SelectedCurrency);
 
-                    CalculateResult();
+                    //CalculateResult();
 
                     SaveData();
                 }
@@ -228,9 +228,9 @@ namespace MyCapital_Mobile_MAUI
 
                     Parts.Remove(SelectedPart);
 
-                    VerticalStackLayout_Content.Remove(SelectedPart.UI as IView);
+                    //VerticalStackLayout_Content.Remove(SelectedPart.UI as IView);
 
-                    CalculateResult();
+                    //CalculateResult();
 
                     SaveData();
                 }
