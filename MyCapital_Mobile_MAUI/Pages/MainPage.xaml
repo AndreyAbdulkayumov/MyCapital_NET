@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyCapital_Mobile_MAUI.Pages;assembly=MyCapital_Mobile_MAUI"
              x:Class="MyCapital_Mobile_MAUI.MainPage" 
              Title="Мой капитал"
              BackgroundColor="#FF171717"             
-             Shell.NavBarIsVisible="False" 
+             Shell.NavBarIsVisible="False"
              Loaded="ContentPage_Loaded">
 
     <!-- Shell.NavBarIsVisible="False" - отключение верхней панели с заголовком -->
@@ -81,7 +82,7 @@
                                  Padding="30,0"
                                  VerticalOptions="StartAndExpand">
 
-
+                <local:Field />
 
             </VerticalStackLayout>
 

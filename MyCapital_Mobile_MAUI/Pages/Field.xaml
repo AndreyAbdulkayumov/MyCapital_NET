@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyCapital_Mobile_MAUI.Pages.Field"
+             HeightRequest="110">
+    
+    <VerticalStackLayout >
+        
+        <Grid>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Grid.Column="0"
+                      IsChecked="True"
+                      Color="#ECECEC"
+                      VerticalOptions="Center"
+                      HorizontalOptions="End"
+                      />
+
+            <Entry Grid.Column="1"
+                   Text="322323"
+                   Placeholder="Введите имя"
+                   FontAutoScalingEnabled="False"
+                   TextColor="White"
+                   FontSize="20"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   />
+
+            <Button Grid.Column="2"
+                    Text="X"
+                    WidthRequest="40"
+                    FontAutoScalingEnabled="False"
+                    FontSize="20"
+                    TextColor="IndianRed"
+                    Background="#404040"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    />
+
+        </Grid>
+        
+        <Grid>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="0.9*"/>
+            </Grid.ColumnDefinitions>
+
+            <Entry Grid.Column="0"
+                   Text="ghsfhff"
+                   Keyboard="Numeric"
+                   Placeholder="..."                   
+                   WidthRequest="120"
+                   BackgroundColor="#404040"
+                   FontAutoScalingEnabled="False"
+                   TextColor="#D0D0D0"
+                   FontSize="20"
+                   MaxLength="11"
+                   HorizontalTextAlignment="Center"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="End"
+                   />
+
+            <Button Grid.Column="2"
+                    Text="ghsfhff"
+                    FontAutoScalingEnabled="False"
+                    FontSize="20"
+                    TextColor="#569CD6"
+                    Background="#404040"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"
+                    />
+            
+        </Grid>
+        
+    </VerticalStackLayout>
+    
+</ContentView>

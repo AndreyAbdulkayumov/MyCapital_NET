@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCapital_Mobile_MAUI", "My
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{66075E39-40DA-4575-A955-98C65CCC5FBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{55936537-3749-C7DC-F15C-3531E8498743}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{66075E39-40DA-4575-A955-98C65CCC5FBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66075E39-40DA-4575-A955-98C65CCC5FBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66075E39-40DA-4575-A955-98C65CCC5FBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55936537-3749-C7DC-F15C-3531E8498743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55936537-3749-C7DC-F15C-3531E8498743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55936537-3749-C7DC-F15C-3531E8498743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55936537-3749-C7DC-F15C-3531E8498743}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

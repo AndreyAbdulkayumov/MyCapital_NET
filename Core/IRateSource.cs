@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Core;
 
-namespace Core
+public enum TypeOfCurrency
 {
-    public enum TypeOfCurrency
-    {
-        NotDefined,
-        Ruble,
-        Dollar,
-        Euro
-    }
+    NotDefined,
+    Ruble,
+    Dollar,
+    Euro
+}
 
-    public struct Rate
-    {
-        public TypeOfCurrency Currency;
-        public double Value;
-    }
+public struct Rate
+{
+    public TypeOfCurrency Currency;
+    public double Value;
+}
 
-    public interface IRateSource
-    {
-        string UpdateDate { get; }
-        string SourceName { get; }
-        string SourceAddress { get; }
-        void Init();
-        Rate GetRate(TypeOfCurrency type);
-    }
+public interface IRateSource
+{
+    string UpdateDate { get; }
+    string SourceName { get; }
+    string SourceAddress { get; }
+    void Init();
+    Rate GetRate(TypeOfCurrency type);
 }

@@ -68,10 +68,14 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Core\Core.csproj" />
+	  <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\ErrorConnectionPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Field.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\MainPage.xaml">

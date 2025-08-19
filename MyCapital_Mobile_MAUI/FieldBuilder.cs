@@ -1,13 +1,4 @@
-﻿using Core;
-using Microsoft.Maui.Controls.Platform;
-using Microsoft.Maui.Platform;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyCapital_Mobile_MAUI
+﻿namespace MyCapital_Mobile_MAUI
 {
     public static class FieldBuilder
     {
