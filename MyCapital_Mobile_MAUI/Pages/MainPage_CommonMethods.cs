@@ -71,34 +71,34 @@ namespace MyCapital_Mobile_MAUI
 
         private void CalculateResult()
         {
-            try
-            {
-                if (Parts.Count != 0)
-                {
-                    AmountOfMoney_rub = 0;
+            //try
+            //{
+            //    if (Parts.Count != 0)
+            //    {
+            //        AmountOfMoney_rub = 0;
 
-                    foreach (PartOfCapital element in Parts)
-                    {
-                        if (element.SelectedCurrency != TypeOfCurrency.NotDefined && element.Visibility == true)
-                        {
-                            AmountOfMoney_rub += element.Value * Data_CB.GetRate(element.SelectedCurrency).Value;
-                        }
-                    }
+            //        foreach (PartOfCapital element in Parts)
+            //        {
+            //            if (element.SelectedCurrency != TypeOfCurrency.NotDefined && element.Visibility == true)
+            //            {
+            //                AmountOfMoney_rub += element.Value * Data_CB.GetRate(element.SelectedCurrency).Value;
+            //            }
+            //        }
 
-                    Button_AmountOfMoney.Text = MakeSpaceInNumber(AmountOfMoney_ConvertIn(ResultCurrency).ToString(CultureInfo.InvariantCulture)) +
-                        " " + Currency.GetShortName(ResultCurrency);
-                }
+            //        Button_AmountOfMoney.Text = MakeSpaceInNumber(AmountOfMoney_ConvertIn(ResultCurrency).ToString(CultureInfo.InvariantCulture)) +
+            //            " " + Currency.GetShortName(ResultCurrency);
+            //    }
 
-                else
-                {
-                    Button_AmountOfMoney.Text = "0 " + Currency.GetShortName(ResultCurrency);
-                }
-            }
+            //    else
+            //    {
+            //        Button_AmountOfMoney.Text = "0 " + Currency.GetShortName(ResultCurrency);
+            //    }
+            //}
 
-            catch (Exception error)
-            {
-                throw new Exception("Ошибка подсчета результата:\n\n" + error.Message);
-            }
+            //catch (Exception error)
+            //{
+            //    throw new Exception("Ошибка подсчета результата:\n\n" + error.Message);
+            //}
         }
     }
 }

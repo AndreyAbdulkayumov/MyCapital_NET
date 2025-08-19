@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Core;
 using Core.RateSourse_RussianCentralBank;
+using ViewModels;
 
 namespace MyCapital_Mobile_MAUI;
 
@@ -16,9 +17,15 @@ public partial class MainPage : ContentPage
     private TypeOfCurrency ResultCurrency = TypeOfCurrency.Ruble;
 
 
-    public MainPage()
+    private readonly MainPage_VM _viewModel;
+
+    public MainPage(MainPage_VM viewModel)
 	{
         InitializeComponent();
+
+        _viewModel = viewModel;
+
+        this.BindingContext = _viewModel;
 
         if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
         {
@@ -34,123 +41,127 @@ public partial class MainPage : ContentPage
 
     private async void ContentPage_Loaded(object sender, EventArgs e)
     {
-        try
-        {
-            Data_CB.Init();
+        await _viewModel.Init();
 
-            DateTime Date = DateTime.Parse(Data_CB.UpdateDate);
+        //try
+        //{
+        //    Data_CB.Init();
 
-            Label_Date.Text = "Курс валют на " + Date.ToString("d MMMM yyyy");
+        //    DateTime Date = DateTime.Parse(Data_CB.UpdateDate);
 
-            Label_Rate_Dollar.Text += Data_CB.GetRate(TypeOfCurrency.Dollar).Value + " руб.";
-            Label_Rate_Euro.Text += Data_CB.GetRate(TypeOfCurrency.Euro).Value + " руб.";
+        //    Label_Date.Text = "Курс валют на " + Date.ToString("d MMMM yyyy");
 
-            List<CapitalValue>? PartsFromSaveFile = SaveFile.GetAllParts(SaveFileName);
+        //    Label_Rate_Dollar.Text += Data_CB.GetRate(TypeOfCurrency.Dollar).Value + " руб.";
+        //    Label_Rate_Euro.Text += Data_CB.GetRate(TypeOfCurrency.Euro).Value + " руб.";
 
-            // Если файл пуст
-            if (PartsFromSaveFile == null)
-            {
-                return;
-            }
+        //    List<CapitalValue>? PartsFromSaveFile = SaveFile.GetAllParts(SaveFileName);
 
-            TypeOfCurrency CurrentCurrency;
+        //    // Если файл пуст
+        //    if (PartsFromSaveFile == null)
+        //    {
+        //        return;
+        //    }
 
-            foreach(CapitalValue element in PartsFromSaveFile)
-            {
-                CurrentCurrency = Currency.GetType(element.Currency);
+        //    TypeOfCurrency CurrentCurrency;
 
-                IView Field = FieldBuilder.Build(
-                    Entry_FieldName_TextChanged,
-                    CheckBox_ChangeVisibility_CheckedChanged,
-                    Entry_AmountOfMoney_TextChanged,
-                    Button_TypeOfCurrency_Clicked,
-                    Button_DeleteField_Clicked,
-                    element.Name,
-                    element.Visibility,
-                    element.Value != 0 ? MakeSpaceInNumber(element.Value.ToString()) : null,
-                    CurrentCurrency != TypeOfCurrency.NotDefined ? Currency.GetName(CurrentCurrency) : null
-                    );
+        //    foreach (CapitalValue element in PartsFromSaveFile)
+        //    {
+        //        CurrentCurrency = Currency.GetType(element.Currency);
 
-                VerticalStackLayout_Content.Add(Field);
+        //        IView Field = FieldBuilder.Build(
+        //            Entry_FieldName_TextChanged,
+        //            CheckBox_ChangeVisibility_CheckedChanged,
+        //            Entry_AmountOfMoney_TextChanged,
+        //            Button_TypeOfCurrency_Clicked,
+        //            Button_DeleteField_Clicked,
+        //            element.Name,
+        //            element.Visibility,
+        //            element.Value != 0 ? MakeSpaceInNumber(element.Value.ToString()) : null,
+        //            CurrentCurrency != TypeOfCurrency.NotDefined ? Currency.GetName(CurrentCurrency) : null
+        //            );
 
-                PartOfCapital Part = new PartOfCapital(
-                    FieldBuilder.LastID,
-                    element.Name,
-                    element.Visibility,
-                    Currency.GetType(element.Currency),
-                    element.Value,
-                    Field
-                    );
+        //        VerticalStackLayout_Content.Add(Field);
 
-                Parts.Add(Part);
-            }
+        //        PartOfCapital Part = new PartOfCapital(
+        //            FieldBuilder.LastID,
+        //            element.Name,
+        //            element.Visibility,
+        //            Currency.GetType(element.Currency),
+        //            element.Value,
+        //            Field
+        //            );
 
-            CalculateResult();
-        }
+        //        Parts.Add(Part);
+        //    }
 
-        catch (Exception error)
-        {
-            await DisplayAlert("Ошибка", "Ошибка запуска приложения:\n\n" + error.Message, "ОK");
-        }
+        //    CalculateResult();
+        //}
+
+        //catch (Exception error)
+        //{
+        //    await DisplayAlert("Ошибка", "Ошибка запуска приложения:\n\n" + error.Message, "ОK");
+        //}
     }    
 
     private async void Button_AmountOfMoney_Clicked(object sender, EventArgs e)
     {
-        try
-        {
-            string SelectedCurrency = await DisplayActionSheet("Выберите валюту:", null, null,
-                    "Рубль", "Доллар", "Евро");
+        await DisplayActionSheet("Выберите валюту:", null, null,
+                   "Рубль", "Доллар", "Евро");
+        //try
+        //{
+        //    string SelectedCurrency = await DisplayActionSheet("Выберите валюту:", null, null,
+        //            "Рубль", "Доллар", "Евро");
 
-            if (SelectedCurrency == null)
-            {
-                return;
-            }
+        //    if (SelectedCurrency == null)
+        //    {
+        //        return;
+        //    }
 
-            ResultCurrency = Currency.GetType(SelectedCurrency);
+        //    ResultCurrency = Currency.GetType(SelectedCurrency);
 
-            Button_AmountOfMoney.Text = MakeSpaceInNumber(AmountOfMoney_ConvertIn(ResultCurrency).ToString(CultureInfo.InvariantCulture)) +
-                " " + Currency.GetShortName(ResultCurrency);
-        }
+        //    Button_AmountOfMoney.Text = MakeSpaceInNumber(AmountOfMoney_ConvertIn(ResultCurrency).ToString(CultureInfo.InvariantCulture)) +
+        //        " " + Currency.GetShortName(ResultCurrency);
+        //}
 
-        catch (Exception error)
-        {
-            await DisplayAlert("Ошибка", error.Message, "ОK");
-        }
+        //catch (Exception error)
+        //{
+        //    await DisplayAlert("Ошибка", error.Message, "ОK");
+        //}
     }
-    
+
     private async void Button_CreateNewField_Clicked(object sender, EventArgs e)
     {
-        try
-        {
-            IView Field = FieldBuilder.Build
-                (
-                Entry_FieldName_TextChanged,
-                CheckBox_ChangeVisibility_CheckedChanged,
-                Entry_AmountOfMoney_TextChanged,
-                Button_TypeOfCurrency_Clicked,
-                Button_DeleteField_Clicked,
-                null,
-                true,
-                null,
-                null
-                );
+        //try
+        //{
+        //    IView Field = FieldBuilder.Build
+        //        (
+        //        Entry_FieldName_TextChanged,
+        //        CheckBox_ChangeVisibility_CheckedChanged,
+        //        Entry_AmountOfMoney_TextChanged,
+        //        Button_TypeOfCurrency_Clicked,
+        //        Button_DeleteField_Clicked,
+        //        null,
+        //        true,
+        //        null,
+        //        null
+        //        );
 
-            VerticalStackLayout_Content.Add(Field);
+        //    VerticalStackLayout_Content.Add(Field);
 
-            Parts.Add(new PartOfCapital(FieldBuilder.LastID) 
-            { 
-                UI = Field, 
-                Visibility = true,
-                SelectedCurrency = TypeOfCurrency.NotDefined, 
-                Value = 0 
-            });
+        //    Parts.Add(new PartOfCapital(FieldBuilder.LastID) 
+        //    { 
+        //        UI = Field, 
+        //        Visibility = true,
+        //        SelectedCurrency = TypeOfCurrency.NotDefined, 
+        //        Value = 0 
+        //    });
 
-            SaveData();
-        }
+        //    SaveData();
+        //}
 
-        catch (Exception error)
-        {
-            await DisplayAlert("Ошибка", error.Message, "ОK");
-        }
+        //catch (Exception error)
+        //{
+        //    await DisplayAlert("Ошибка", error.Message, "ОK");
+        //}
     }
 }
