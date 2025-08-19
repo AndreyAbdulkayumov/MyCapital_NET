@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MyCapital.MAUI.Pages;assembly=MyCapital.MAUI"
+             xmlns:viewModels="clr-namespace:ViewModels;assembly=ViewModels"
+             x:Class="MyCapital.MAUI.MainPage" 
+             x:DataType="viewModels:MainPage_VM"
+             Title="Мой капитал"
+             BackgroundColor="#171717"             
+             Shell.NavBarIsVisible="False"
+             Loaded="ContentPage_Loaded">
+
+    <!-- Shell.NavBarIsVisible="False" - отключение верхней панели с заголовком -->
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="240"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              BackgroundColor="#282828">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" 
+                   Text="{Binding RateOfCurrencyDate, Mode=OneWay}" 
+                   Margin="20,0,0,0"
+                   FontSize="20"
+                   TextColor="Silver"
+                   FontAutoScalingEnabled="False"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Label Grid.Row="1"
+                   Text="{Binding RateDollar, Mode=OneWay}" 
+                   Margin="20,0,0,0"
+                   TextColor="Silver"
+                   FontSize="18"
+                   FontAutoScalingEnabled="False"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Label Grid.Row="1"
+                   Text="{Binding RateEuro, Mode=OneWay}" 
+                   Margin="180,0,0,0"
+                   TextColor="Silver"
+                   FontSize="18"
+                   FontAutoScalingEnabled="False"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Label Text="Всего средств:" Grid.Row="2"
+                   Margin="20,0,0,0"
+                   FontSize="18"
+                   FontAutoScalingEnabled="False"
+                   TextColor="#AF562F"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+
+            <Button Grid.Row="2"
+                    Text="{Binding AmountOfMoney, Mode=OneWay}"                    
+                    FontSize="20"
+                    FontAutoScalingEnabled="False"
+                    BackgroundColor="#404040"
+                    TextColor="#E6E6E6"
+                    Margin="155,0,0,0" 
+                    VerticalOptions="Center" HorizontalOptions="Start"
+                    Command="{Binding Command_ChangeСurrency}"/>
+
+            <Button Grid.Row="3"                    
+                    Text="Добавить новое поле"
+                    FontSize="16"
+                    FontAutoScalingEnabled="False"
+                    Background="#404040"
+                    TextColor="Silver"
+                    Margin="20,0,0,0"
+                    VerticalOptions="Center" HorizontalOptions="Start"
+                    Command="{Binding Command_CreateNewField}"/>
+            
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            
+            <StackLayout BindableLayout.ItemsSource="{Binding Fields}" 
+                         Spacing="20"
+                         Padding="20">
+                
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <local:Field />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+                
+            </StackLayout>
+            
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
