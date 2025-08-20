@@ -10,6 +10,8 @@ namespace ViewModels;
 
 public class MainPage_VM : ReactiveObject
 {
+    private const string SaveFileName = "Capital.json";
+
     private string _rateOfCurrencyDate = "Курс валют на xx.xx.xxxx";
 
     public string RateOfCurrencyDate
@@ -67,7 +69,7 @@ public class MainPage_VM : ReactiveObject
         Command_ChangeСurrency = ReactiveCommand.CreateFromTask(ChangeCurrency);
         Command_ChangeСurrency.ThrownExceptions.Subscribe(async error => await _notifications.ShowAlert("Ошибка", $"Ошибка изменения типа валюты.\n\n{error.Message}", "ОK"));
 
-        Command_CreateNewField = ReactiveCommand.Create(() => Fields.Add(new Field_VM(RemoveField, _notifications)));
+        Command_CreateNewField = ReactiveCommand.Create(() => Fields.Add(new Field_VM(null, RemoveField, _notifications)));
         Command_CreateNewField.ThrownExceptions.Subscribe(async error => await _notifications.ShowAlert("Ошибка", $"Ошибка создания нового поля.\n\n{error.Message}", "ОK"));
     }
 
@@ -93,11 +95,21 @@ public class MainPage_VM : ReactiveObject
 
             RateDollar = $"1$ = {_rateSource.GetRate(TypeOfCurrency.Dollar).Value} руб.";
             RateEuro = $"1E = {_rateSource.GetRate(TypeOfCurrency.Euro).Value} руб.";
+
+            var partsFromSaveFile = SaveFile.GetAllParts(SaveFileName);
+
+            if (partsFromSaveFile == null)
+                return;
+
+            foreach (var part in partsFromSaveFile)
+            {
+                Fields.Add(new Field_VM(part, RemoveField, _notifications));
+            }
         }
 
         catch (Exception error)
         {
-            await _notifications.ShowAlert("Ошибка", $"\"Ошибка запуска приложения:\\n\\n\"{error.Message}", "Ок");
+            await _notifications.ShowAlert("Ошибка", $"Ошибка запуска приложения:\n\n{error.Message}", "Ок");
         }        
     }
 
@@ -112,6 +124,31 @@ public class MainPage_VM : ReactiveObject
 
         AmountOfMoney = $"{MakeSpaceInNumber(AmountOfMoney_ConvertIn(_resultCurrency).ToString(CultureInfo.InvariantCulture))} {Currency.GetShortName(_resultCurrency)}";
     }
+
+    //private void CalculateResult()
+    //{
+    //    try
+    //    {
+    //        AmountOfMoney_rub = 0;
+
+    //        foreach (PartOfCapital element in Fields)
+    //        {
+    //            if (element.SelectedCurrency != TypeOfCurrency.NotDefined && element.Visibility == true)
+    //            {
+    //                AmountOfMoney_rub += element.Value * Data_CB.GetRate(element.SelectedCurrency).Value;
+    //            }
+    //        }
+
+    //        Button_AmountOfMoney.Text = MakeSpaceInNumber(AmountOfMoney_ConvertIn(ResultCurrency).ToString(CultureInfo.InvariantCulture)) +
+    //            " " + Currency.GetShortName(ResultCurrency);
+        
+    //    }
+
+    //    catch (Exception error)
+    //    {
+    //        throw new Exception("Ошибка подсчета результата:\n\n" + error.Message);
+    //    }
+    //}
 
     private double AmountOfMoney_ConvertIn(TypeOfCurrency Type)
     {

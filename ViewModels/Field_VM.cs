@@ -12,7 +12,11 @@ public class Field_VM : ReactiveObject
     public bool IsSelected
     {
         get => _isSelected;
-        set => this.RaiseAndSetIfChanged(ref _isSelected, value);
+        set
+        {
+            this.RaiseAndSetIfChanged(ref _isSelected, value);
+            _value.Visibility = value;
+        }
     }
 
     private string _title = string.Empty;
@@ -44,14 +48,34 @@ public class Field_VM : ReactiveObject
 
     public readonly Guid Id;
 
+    private readonly CapitalValue _value;
+
     private readonly INotifications _notifications;
 
-    public Field_VM(Action<Guid> removeFieldHandler, INotifications notifications)
+    public Field_VM(CapitalValue? initValue, Action<Guid> removeFieldHandler, INotifications notifications)
     {
         _notifications = notifications ?? throw new ArgumentNullException(nameof(notifications));
 
         Id = Guid.NewGuid();
 
+        if (initValue != null)
+        {
+            _value = initValue;
+
+            IsSelected = initValue.Visibility;
+            Title = initValue.Name;
+
+            var currencyType = Currency.GetType(initValue.Currency);
+            SelectedCurrencyName = currencyType == TypeOfCurrency.NotDefined ? "Рубль" : Currency.GetName(currencyType);
+
+            AmountOfMoney = initValue.Value.ToString();
+        }
+
+        else
+        {
+            _value = new CapitalValue(string.Empty, true, "Рубль", 0);
+        }
+        
         Command_RemoveField = ReactiveCommand.Create(() => removeFieldHandler(Id));
         Command_RemoveField.ThrownExceptions.Subscribe(async error => await _notifications.ShowAlert("Ошибка", error.Message, "ОК"));
 
